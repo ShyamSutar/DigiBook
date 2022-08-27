@@ -110,7 +110,7 @@ router.post('/loginuser', [
 //Route 3:  get loggedin users details.
 
 
-router.post('/sample' , fetchUser,async(req,res)=>{
+router.post('/getuser' , fetchUser,async(req,res)=>{
 
 
 try {
