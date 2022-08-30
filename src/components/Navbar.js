@@ -1,10 +1,22 @@
-import React from "react";
+import React,{useEffect} from "react";
 import "tw-elements";
-import {Link
+import {Link, useLocation
 } from "react-router-dom";
 
+
 export default function Navbar() {
+  
+  let location = useLocation();
+
+  useEffect(() => {
+    console.log(location.pathname)
+  }, [location]);
+
+  
   return (
+
+
+
     <>
       <nav className="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-900">
         <div className="container flex flex-wrap justify-between items-center mx-auto">
@@ -15,7 +27,7 @@ export default function Navbar() {
               alt="Flowbite Logo"
             />
             <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
-              Flowbite
+              DigiBook
             </span>
           </a>
           <button
