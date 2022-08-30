@@ -11,7 +11,7 @@ const Notes = () => {
 
      <div className="flex flex-wrap my-8 justify-center gap-20">
      {notes.map((note) => {
-        return <NoteItem note={note}/>
+        return <NoteItem key={note._id} note={note}/>
       })}
      </div>
     </>
