@@ -13,7 +13,7 @@ const Notes = () => {
 
 
 <div>
-      <h2>Your Notes</h2>
+      <h2 className="text-3xl font-bold tracking-tight leading-tight mt-6">Your Notes</h2>
 
      <div className="flex flex-wrap my-8 justify-center gap-20">
      {notes.map((note) => {
