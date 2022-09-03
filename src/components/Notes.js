@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef,useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import noteContext from "../context/notes/noteContext";
 import NoteItem from "./NoteItem";
 import AddNote from "./AddNote";
@@ -7,22 +7,31 @@ const Notes = () => {
   const context = useContext(noteContext);
   const { notes, getNotes, editNote } = context;
 
-  
   useEffect(() => {
-      getNotes();
-    }, []);
-    
-    const updateNote = (currentNote) => {
-        ref.current.click();
-        setNote({id: currentNote._id, etitle: currentNote.title, edescription:currentNote.description, etag:currentNote.tag})
-    };
-    const ref = useRef(null);
-    
-    const [note, setNote] = useState({id:"",etitle: "", edescription: "", etag: "default"})
+    getNotes();
+  }, []);
+
+  const updateNote = (currentNote) => {
+    ref.current.click();
+    setNote({
+      id: currentNote._id,
+      etitle: currentNote.title,
+      edescription: currentNote.description,
+      etag: currentNote.tag,
+    });
+  };
+  const ref = useRef(null);
+
+  const [note, setNote] = useState({
+    id: "",
+    etitle: "",
+    edescription: "",
+    etag: "default",
+  });
   const handleClick = (e) => {
     e.preventDefault();
     console.log("updating the note", note);
-    editNote(note.id,note.etitle,note.edescription,note.etag)
+    editNote(note.id, note.etitle, note.edescription, note.etag);
   };
 
   const onChange = (e) => {
@@ -35,21 +44,21 @@ const Notes = () => {
         ref={ref}
         type="button"
         className="hidden px-6
-py-2.5
-bg-blue-600
-text-white
-font-medium
-text-xs
-leading-tight
-uppercase
-rounded
-shadow-md
-hover:bg-blue-700 hover:shadow-lg
-focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0
-active:bg-blue-800 active:shadow-lg
-transition
-duration-150
-ease-in-out"
+        py-2.5
+      bg-blue-600
+      text-white
+        font-medium
+        text-xs
+        leading-tight
+        uppercase
+        rounded
+        shadow-md
+        hover:bg-blue-700 hover:shadow-lg
+        focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0
+        active:bg-blue-800 active:shadow-lg
+        transition
+        duration-150
+        ease-in-out"
         data-bs-toggle="modal"
         data-bs-target="#exampleModal"
       >
@@ -70,9 +79,7 @@ ease-in-out"
                 className="text-xl font-medium leading-normal text-gray-800"
                 id="exampleModalLabel"
               >
-                
                 Edit Note
-
               </h5>
               <button
                 type="button"
@@ -84,7 +91,6 @@ ease-in-out"
             <div className="modal-body relative p-4">
               {/* modal body */}
               <form>
-                
                 <div className="mb-6">
                   <label
                     htmlFor="etitle"
@@ -98,6 +104,7 @@ ease-in-out"
                     name="etitle"
                     value={note.etitle}
                     onChange={onChange}
+                    required
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   />
                 </div>
@@ -134,12 +141,10 @@ ease-in-out"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   />
                 </div>
-              </form>
-            </div>
-            <div className="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b-md">
-              <button
-                type="button"
-                className="px-6
+                <div className="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b-md">
+                  <button
+                    type="button"
+                    className="px-6
     py-2.5
     bg-purple-600
     text-white
@@ -155,13 +160,13 @@ ease-in-out"
     transition
     duration-150
     ease-in-out"
-                data-bs-dismiss="modal"
-              >
-                Close
-              </button>
-              <button
-                type="button"
-                className="px-6
+                    data-bs-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                  <button
+                    type="button"
+                    className="px-6
 py-2.5
 bg-blue-600
 text-white
@@ -178,11 +183,13 @@ transition
 duration-150
 ease-in-out
 ml-1"
-                data-bs-dismiss="modal"
-                onClick={handleClick}
-              >
-                Save changes
-              </button>
+                    data-bs-dismiss="modal"
+                    onClick={handleClick}
+                  >
+                    Save changes
+                  </button>
+                </div>
+              </form>
             </div>
           </div>
         </div>
@@ -195,6 +202,7 @@ ml-1"
         </h2>
 
         <div className="flex flex-wrap my-8 justify-center gap-20">
+          {notes.length == 0 && "No notes to display"}
           {notes.map((note) => {
             return (
               <NoteItem key={note._id} note={note} updateNote={updateNote} />

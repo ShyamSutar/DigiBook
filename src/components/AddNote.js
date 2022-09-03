@@ -7,11 +7,12 @@ const AddNote = () => {
   const context = useContext(noteContext);
   const {addNote} = context;
 
-  const [note, setNote] = useState({title: "", description: "", tag: "default"})
+  const [note, setNote] = useState({title: "", description: "", tag: ""})
 
   const handleClick = (e) =>{
       e.preventDefault();
         addNote(note.title, note.description, note.tag)
+        setNote({title: "", description: "", tag: ""});
   }
 
   const onChange = (e) => {
@@ -30,13 +31,17 @@ const AddNote = () => {
             Title
           </label>
           <input
+            
             type="text"
             id="title"
             name="title"
             onChange={onChange}
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            required 
+            value={note.title}
+            className="peer bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
 
           />
+          <p className="invisible peer-invalid:visible text-red-700 font-light">Please Enter the Title</p>
         </div>
         <div className="mb-6">
           <label
@@ -50,9 +55,13 @@ const AddNote = () => {
             id="description"
             name="description"
             onChange={onChange}
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            required
+            value={note.description}
+            className="peer bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
            
           />
+          <p className="invisible peer-invalid:visible text-red-700 font-light">Please Enter the Email</p>
+
         </div>
 
         <div className="mb-6">
@@ -67,9 +76,13 @@ const AddNote = () => {
             id="tag"
             name="tag"
             onChange={onChange}
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            required
+            value={note.tag}
+            className="peer bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
            
           />
+          <p className="invisible peer-invalid:visible text-red-700 font-light">Please Enter the Tag</p>
+
         </div>
         
         <button

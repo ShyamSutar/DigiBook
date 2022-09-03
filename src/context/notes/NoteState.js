@@ -25,20 +25,11 @@ const NoteState = (props) => {
     });
 
     //TODO: api call
-
-    console.log("Adding a new note");
-
-    const note = {
-      _id: "630a30e36kfyu49e14b4443cd1e",
-      user: "6308d4729368b7db68dd374e",
-      title: title,
-      description: description,
-      tag: tag,
-      date: "2022-08-27T14:57:39.582Z",
-      __v: 0,
-    };
-    console.log(note);
+    const note = await response.json();
     setNotes(notes.concat(note));
+
+
+
   };
 
   //get all Notes
