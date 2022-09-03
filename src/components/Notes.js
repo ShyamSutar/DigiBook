@@ -19,6 +19,7 @@ const Notes = (props) => {
       edescription: currentNote.description,
       etag: currentNote.tag,
     });
+
   };
   const ref = useRef(null);
 
@@ -32,6 +33,7 @@ const Notes = (props) => {
     e.preventDefault();
     console.log("updating the note", note);
     editNote(note.id, note.etitle, note.edescription, note.etag);
+    props.showAlert("Updated Successfully", "blue")
   };
 
   const onChange = (e) => {
@@ -195,7 +197,7 @@ ml-1"
         </div>
       </div>
 
-      <AddNote />
+      <AddNote showAlert={props.showAlert}/>
       <div>
         <h2 className="text-3xl font-bold tracking-tight leading-tight mt-6">
           Your Notes
@@ -205,7 +207,7 @@ ml-1"
           {notes.length == 0 && "No notes to display"}
           {notes.map((note) => {
             return (
-              <NoteItem key={note._id} note={note} updateNote={updateNote} />
+              <NoteItem key={note._id} note={note} updateNote={updateNote} showAlert={props.showAlert} />
             );
           })}
         </div>
