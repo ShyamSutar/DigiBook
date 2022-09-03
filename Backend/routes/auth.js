@@ -14,6 +14,8 @@ router.post('/createuser', [
   body('password', 'Password must be atleast 5 characters').isLength({ min: 5 }),
 ] , async(req,res)=>{
 
+  let success = false;
+
   //if there are errors, return bad request and the error
   
   const errors = validationResult(req);
@@ -46,9 +48,10 @@ try {
       }
     }
     const authToken = jwt.sign(data, JWT_SECRET);
-    res.json({ authToken})
+    success = true
+    res.json({success, authToken})
 
-    res.json(user)
+    // res.json(user)
     
     // .then(user => res.json(user))
     // .catch(err => {console.log(err)
