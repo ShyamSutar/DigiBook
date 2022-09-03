@@ -46,7 +46,7 @@ try {
       }
     }
     const authToken = jwt.sign(data, JWT_SECRET);
-    res.json({authToken})
+    res.json({ authToken})
 
     res.json(user)
     
@@ -83,13 +83,15 @@ router.post('/loginuser', [
   try {
     let user = await User.findOne({email});
     if(!user){
-      return res.status(400).json({error : "Wrong Credentials"});
+      success = false;
+      return res.status(400).json({success, error : "Wrong Credentials"});
     }
 
     const passCompare = await bcrypt.compare(password, user.password);
 
     if(!passCompare){
-      return res.status(400).json({error : "Wrong Credentials"});
+      success = false;
+      return res.status(400).json({success, error : "Wrong Credentials"});
     }
 
     const data = {
@@ -98,7 +100,8 @@ router.post('/loginuser', [
       }
     }
     const authToken = jwt.sign(data, JWT_SECRET);
-    res.json({authToken});
+    success = true;
+    res.json({success, authToken});
 
   } catch (error) {
     console.error(error.message);
