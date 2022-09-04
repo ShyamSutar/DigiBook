@@ -1,8 +1,7 @@
 import React,{useEffect} from "react";
 import "tw-elements";
-import {Link
+import {Link, useNavigate
 } from "react-router-dom";
-
 
 export default function Navbar() {
   
@@ -11,7 +10,12 @@ export default function Navbar() {
   // useEffect(() => {
   //   console.log(location.pathname)
   // }, [location]);
+  let navigate = useNavigate()
 
+  const handleLogout = () => {
+    localStorage.removeItem('token')
+    navigate('/login')
+  }
   
   return (
 
@@ -72,13 +76,13 @@ export default function Navbar() {
                 </Link>
               </li>
 
-              <li>
+              {!localStorage.getItem('token')?<li>
               <Link to="/login" type="button" className="block py-2 pr-4 pl-3 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Login</Link>
-              </li>
+              </li>: <button onClick={handleLogout} className="block py-2 pr-4 pl-3 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Logout</button>}
 
-              <li>
+              {!localStorage.getItem('token')&&<li>
               <Link to="/signup" type="button" className="block py-2 pr-4 pl-3 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Signup</Link>
-              </li>
+              </li>}
               
             </ul>
           </div>
